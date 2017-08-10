@@ -27,6 +27,7 @@ employee instances.
     - grade - String value.
     - hiredDate - Date value.
     - firedDate - Date value.
+    - salary - Double value.
 4. List page on "/employee/list" path.
 
 ## user-demo artifact
@@ -37,4 +38,4 @@ Folowing endpoints available:
 
 1. Index page on "/" path. It shows textual description of application.
 2. Statistics page on "/statistics" path. It shows small textual
-report. Now it consists of total count of employees.
+report. Now it consists of total count of employees and average salary.

@@ -42,13 +42,18 @@ public class ApplicationController {
         Employee[] body = forEntity.getBody();
 
         int count = 0;
+        //TODO Panfilov I.V. 10.08.17: check on correct double value operations.
+        double totalSalary = 0.0;
 
         for (Employee employee : body) {
             count++;
+            totalSalary += employee.getSalary();
         }
+        double avgSalary = count > 0 ? totalSalary / count : 0.0;
 
         StringBuilder sb = new StringBuilder("Statistics").append(System.lineSeparator());
-        sb.append("\tentity count: ").append(count);
+        sb.append("\tentity count: ").append(count).append(System.lineSeparator());
+        sb.append("\taverage salary: ").append(avgSalary);
 
         return sb.toString();
     }

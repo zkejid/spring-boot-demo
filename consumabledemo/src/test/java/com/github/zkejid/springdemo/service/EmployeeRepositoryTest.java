@@ -26,10 +26,10 @@ public class EmployeeRepositoryTest {
         // without delete all there is bootstrap data visible:
         // com.github.zkejid.springdemo.SpringDemoApplication.bootstrap()
         employeeRepository.deleteAll();
-        employeeRepository.save(new Employee("John Doe", "SEO", new Date(), new Date()));
-        employeeRepository.save(new Employee("John Doe", "Senior", new Date(), new Date()));
-        employeeRepository.save(new Employee("Jillian Doe", "Middle", new Date(), new Date()));
-        employeeRepository.save(new Employee("John Smith", "Junior", new Date(), new Date()));
+        employeeRepository.save(new Employee("John Doe", "SEO", new Date(), new Date(), 1005.1));
+        employeeRepository.save(new Employee("John Doe", "Senior", new Date(), new Date(), 800.1));
+        employeeRepository.save(new Employee("Jillian Doe", "Middle", new Date(), new Date(), 500.1));
+        employeeRepository.save(new Employee("John Smith", "Junior", new Date(), new Date(), 100.1));
     }
 
     @After

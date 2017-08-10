@@ -15,9 +15,6 @@ import javax.persistence.Id;
 @Entity
 public class Employee {
 
-    protected Employee() {
-    }
-
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
@@ -37,9 +34,20 @@ public class Employee {
      * Date, person was fired.
      */
     private Date firedDate;
+    /**
+     * Salary of the person.
+     */
+    private Double salary;
 
-    public Employee(String name, String grade, Date hiredDate, Date firedDate) {
+    protected Employee() {
+    }
+
+    public Employee(String name, String grade, Date hiredDate, Date firedDate, Double salary) {
         this.name = name;
+        this.grade = grade;
+        this.hiredDate = hiredDate;
+        this.firedDate = firedDate;
+        this.salary = salary;
     }
 
     public long getId() {
@@ -82,6 +90,14 @@ public class Employee {
         this.firedDate = firedDate;
     }
 
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,7 +109,8 @@ public class Employee {
         if (name != null ? !name.equals(employee.name) : employee.name != null) return false;
         if (grade != null ? !grade.equals(employee.grade) : employee.grade != null) return false;
         if (hiredDate != null ? !hiredDate.equals(employee.hiredDate) : employee.hiredDate != null) return false;
-        return firedDate != null ? firedDate.equals(employee.firedDate) : employee.firedDate == null;
+        if (firedDate != null ? !firedDate.equals(employee.firedDate) : employee.firedDate != null) return false;
+        return salary != null ? salary.equals(employee.salary) : employee.salary == null;
     }
 
     @Override
@@ -103,6 +120,7 @@ public class Employee {
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (hiredDate != null ? hiredDate.hashCode() : 0);
         result = 31 * result + (firedDate != null ? firedDate.hashCode() : 0);
+        result = 31 * result + (salary != null ? salary.hashCode() : 0);
         return result;
     }
 }

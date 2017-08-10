@@ -62,9 +62,10 @@ public class ApplicationController {
             @RequestParam(value="name") String name,
             @RequestParam(value="grade") String grade,
             @RequestParam(value="hiredDate") Date hiredDate,
-            @RequestParam(value="firedDate") Date firedDate
+            @RequestParam(value="firedDate") Date firedDate,
+            @RequestParam(value="salary") Double salary
     ) {
-        return employeeRepository.save(new Employee(name, grade, hiredDate, firedDate));
+        return employeeRepository.save(new Employee(name, grade, hiredDate, firedDate, salary));
     }
 
     /**
