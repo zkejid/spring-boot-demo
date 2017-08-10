@@ -66,4 +66,18 @@ public class ApplicationController {
     ) {
         return employeeRepository.save(new Employee(name, grade, hiredDate, firedDate));
     }
+
+    /**
+     * Employee list handler.
+     * <p/>
+     * lists available employee instances
+     * <p/>
+     * TODO Panfilov I.V. 10.08.17: test it.
+     * TODO Panfilov I.V. 10.08.17: avoid OOME on large dataset. add restrictions
+     * @return lis of employee instances
+     */
+    @RequestMapping("/employee/list")
+    public Iterable<Employee> list() {
+        return employeeRepository.findAll();
+    }
 }
