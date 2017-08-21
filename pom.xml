@@ -4,16 +4,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.zkejid</groupId>
-	<artifactId>spring-demo</artifactId>
+	<artifactId>spring-demo-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>userdemo</module>
-        <module>consumabledemo</module>
-        <module>consumablecore</module>
+        <module>logic-service</module>
+        <module>crud-service</module>
+        <module>entities</module>
     </modules>
     <packaging>pom</packaging>
 
-	<name>spring-demo</name>
+	<name>spring-demo-parent</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -33,12 +33,12 @@
             </dependency>
             <dependency>
                 <groupId>com.github.zkejid</groupId>
-                <artifactId>consumable-demo</artifactId>
+                <artifactId>spring-demo-crud-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.zkejid</groupId>
-                <artifactId>consumable-core</artifactId>
+                <artifactId>spring-demo-entities</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
