@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class ApplicationController {
             @RequestParam(value="grade") String grade,
             @RequestParam(value="hiredDate") Date hiredDate,
             @RequestParam(value="firedDate") Date firedDate,
-            @RequestParam(value="salary") Double salary
+            @RequestParam(value="salary") BigDecimal salary
     ) {
         return employeeRepository.save(new Employee(name, grade, hiredDate, firedDate, salary));
     }

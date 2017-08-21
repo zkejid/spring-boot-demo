@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class EmployeeRepositoryTest {
         // without delete all there is bootstrap data visible:
         // com.github.zkejid.springdemo.SpringDemoApplication.bootstrap()
         employeeRepository.deleteAll();
-        employeeRepository.save(new Employee("John Doe", "SEO", new Date(), new Date(), 1005.1));
-        employeeRepository.save(new Employee("John Doe", "Senior", new Date(), new Date(), 800.1));
-        employeeRepository.save(new Employee("Jillian Doe", "Middle", new Date(), new Date(), 500.1));
-        employeeRepository.save(new Employee("John Smith", "Junior", new Date(), new Date(), 100.1));
+        employeeRepository.save(new Employee("John Doe", "SEO", new Date(), new Date(), new BigDecimal(1005.1)));
+        employeeRepository.save(new Employee("John Doe", "Senior", new Date(), new Date(), new BigDecimal(800.1)));
+        employeeRepository.save(new Employee("Jillian Doe", "Middle", new Date(), new Date(), new BigDecimal(500.1)));
+        employeeRepository.save(new Employee("John Smith", "Junior", new Date(), new Date(), new BigDecimal(100.1)));
     }
 
     @After

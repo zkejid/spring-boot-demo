@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
+
 /**
  * Controller defines web access to application.
  */
@@ -43,13 +45,14 @@ public class ApplicationController {
 
         int count = 0;
         //TODO Panfilov I.V. 10.08.17: check on correct double value operations.
-        double totalSalary = 0.0;
+        BigDecimal totalSalary = new BigDecimal(0.0);
 
         for (Employee employee : body) {
             count++;
-            totalSalary += employee.getSalary();
+            BigDecimal salary = employee.getSalary();
+            totalSalary = totalSalary.add(salary);
         }
-        double avgSalary = count > 0 ? totalSalary / count : 0.0;
+        double avgSalary = count > 0 ? totalSalary.doubleValue() / count : 0.0;
 
         StringBuilder sb = new StringBuilder("Statistics").append(System.lineSeparator());
         sb.append("\tentity count: ").append(count).append(System.lineSeparator());

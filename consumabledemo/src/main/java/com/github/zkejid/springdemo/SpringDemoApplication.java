@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -27,10 +28,10 @@ public class SpringDemoApplication {
 	@Bean
 	public CommandLineRunner bootstrap(ApplicationContext ctx) {
 		return args -> {
-			employeeRepository.save(new Employee("John Doe", "SEO", new Date(), new Date(), 1005.1));
-			employeeRepository.save(new Employee("John Doe", "Senior", new Date(), new Date(), 800.1));
-			employeeRepository.save(new Employee("Jillian Doe", "Middle", new Date(), new Date(), 500.1));
-			employeeRepository.save(new Employee("John Smith", "Junior", new Date(), new Date(), 100.1));
+			employeeRepository.save(new Employee("John Doe", "SEO", new Date(), new Date(), new BigDecimal(1005.1)));
+			employeeRepository.save(new Employee("John Doe", "Senior", new Date(), new Date(), new BigDecimal(800.1)));
+			employeeRepository.save(new Employee("Jillian Doe", "Middle", new Date(), new Date(), new BigDecimal(500.1)));
+			employeeRepository.save(new Employee("John Smith", "Junior", new Date(), new Date(), new BigDecimal(100.1)));
 		};
 	}
 }
