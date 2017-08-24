@@ -1,26 +1,22 @@
 package com.github.zkejid.springdemo.web;
 
-import com.github.zkejid.springdemo.entities.Employee;
-import com.github.zkejid.springdemo.service.EmployeeRepository;
+import com.github.zkejid.springdemo.entities.TextEntity;
+import com.github.zkejid.springdemo.service.TextEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Controller defines web access to application.
- *
- * TODO Panfilov I.V. 10.08.17: add 'list all' handler, 'get by id' handler.
  */
 @RestController
 public class ApplicationController {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private TextEntityRepository textEntityRepository;
 
     /**
      * Index page handler.
@@ -29,57 +25,35 @@ public class ApplicationController {
      */
     @RequestMapping("/")
     public String index() {
-        return "Employee CRUD application";
+        return "TextEntity CRUD application";
     }
 
     /**
-     * Custom search handler
+     * TextEntity creation handler.
      * <p/>
-     * Returns all employee instances matching given name string.
-     * <p/>
-     * TODO Panfilov I.V. 10.08.17: test it. check corner cases of 'name' argument.
-     * @param name search argument - {@link Employee#name}.
-     * @return list of employees, which name equals to given name argument
-     */
-    @RequestMapping("/employee/byname")
-    public List<Employee> byName(@RequestParam(value="name") String name) {
-        return employeeRepository.findByName(name);
-    }
-
-    /**
-     * Employee creation handler.
-     * <p/>
-     * Places new employee instance with given attribute values into DB.
+     * Places new instance with given attribute values into DB.
      * <p/>
      * TODO Panfilov I.V. 10.08.17: test it. check corner cases of arguments.
-     * @param name {@link Employee#name}
-     * @param grade {@link Employee#grade}
-     * @param hiredDate {@link Employee#hiredDate}
-     * @param firedDate {@link Employee#firedDate}
-     * @return newly created and persisted instance of Employee
+     * @param title {@link TextEntity#title}
+     * @param content {@link TextEntity#content}
+     * @return newly created and persisted instance of TextEntity
      */
-    @RequestMapping("/employee/create")
-    public Employee create(
-            @RequestParam(value="name") String name,
-            @RequestParam(value="grade") String grade,
-            @RequestParam(value="hiredDate") Date hiredDate,
-            @RequestParam(value="firedDate") Date firedDate,
-            @RequestParam(value="salary") BigDecimal salary
+    @RequestMapping("/text/create")
+    public TextEntity create(
+            @RequestParam(value="title") String title,
+            @RequestParam(value="content") String content
     ) {
-        return employeeRepository.save(new Employee(name, grade, hiredDate, firedDate, salary));
+        return textEntityRepository.save(new TextEntity(title, content, new Date()));
     }
 
     /**
-     * Employee list handler.
-     * <p/>
-     * lists available employee instances
-     * <p/>
+     * TextEntity list handler.
      * TODO Panfilov I.V. 10.08.17: test it.
      * TODO Panfilov I.V. 10.08.17: avoid OOME on large dataset. add restrictions
-     * @return lis of employee instances
+     * @return list of all text entity instances
      */
-    @RequestMapping("/employee/list")
-    public Iterable<Employee> list() {
-        return employeeRepository.findAll();
+    @RequestMapping("/text/list")
+    public Iterable<TextEntity> list() {
+        return textEntityRepository.findAll();
     }
 }
