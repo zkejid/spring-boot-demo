@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
  * TextEntity entity. Represents unit of textual data.
  */
 @Entity
-public class TextEntity extends AbstractPersistable<Long>{
+public class TextEntity extends AbstractPersistable<Long> {
     /**
      * Title of the text or short description.
      * String size is limited by 160 symbols. The '160' value is chosen with respect to traditions only:

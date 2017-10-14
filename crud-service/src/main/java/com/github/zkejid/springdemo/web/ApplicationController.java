@@ -1,12 +1,14 @@
 package com.github.zkejid.springdemo.web;
 
 import com.github.zkejid.springdemo.entities.TextEntity;
+import com.github.zkejid.springdemo.entities.TextEntityCreateResponse;
 import com.github.zkejid.springdemo.service.TextEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 /**
@@ -15,45 +17,48 @@ import java.util.Date;
 @RestController
 public class ApplicationController {
 
+    @SuppressWarnings("unused") //cause autowired
     @Autowired
     private TextEntityRepository textEntityRepository;
 
     /**
-     * Index page handler.
-     * <p/>
-     * Returns description of application service.
-     */
-    @RequestMapping("/")
-    public String index() {
-        return "TextEntity CRUD application";
-    }
-
-    /**
      * TextEntity creation handler.
      * <p/>
-     * Places new instance with given attribute values into DB.
+     * Places new instance into the system.
      * <p/>
-     * TODO Panfilov I.V. 10.08.17: test it. check corner cases of arguments.
-     * @param title {@link TextEntity#title}
-     * @param content {@link TextEntity#content}
+     * @param textEntity binding for object to save. not fully valid - need {@link TextEntity#creationDate}.
      * @return newly created and persisted instance of TextEntity
      */
-    @RequestMapping("/text/create")
-    public TextEntity create(
-            @RequestParam(value="title") String title,
-            @RequestParam(value="content") String content
-    ) {
-        return textEntityRepository.save(new TextEntity(title, content, new Date()));
+    @SuppressWarnings("WeakerAccess")   // Cause it is rest handler.
+    // TODO Panfilov I.V. Move /create to "path constants" class
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    // There is no @Valid on textEntity cause it is not valid yet.
+    // TODO Panfilov I.V. rework validation so it would be possible to validate argument other way than if-conditions.
+    public TextEntityCreateResponse create(TextEntity textEntity) {
+        if (textEntity.getId() != null) {
+            assert false : "id should be null";
+            return new TextEntityCreateResponse("id should be null");
+        }
+        // TODO Panfilov I.V. Have to use magic constant. Better to use custom validators
+        if (textEntity.getTitle() == null || textEntity.getTitle().length() > 160) {
+            assert false : "title should not be null and should be less than 160";
+            return new TextEntityCreateResponse("title should not be null and should be less than 160");
+        }
+        if (textEntity.getContent() == null) {
+            assert false : "content should not be null";
+            return new TextEntityCreateResponse("content should not be null");
+        }
+        if (textEntity.getCreationDate() != null) {
+            assert false : "creation date should be null";
+            return new TextEntityCreateResponse("creation date should be null");
+        }
+        textEntity.setCreationDate(new Date());
+        TextEntity save = textEntityRepository.save(textEntity);
+        return new TextEntityCreateResponse(save);
     }
 
-    /**
-     * TextEntity list handler.
-     * TODO Panfilov I.V. 10.08.17: test it.
-     * TODO Panfilov I.V. 10.08.17: avoid OOME on large dataset. add restrictions
-     * @return list of all text entity instances
-     */
-    @RequestMapping("/text/list")
-    public Iterable<TextEntity> list() {
-        return textEntityRepository.findAll();
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String greeting() {
+        return "Hello World";
     }
 }
