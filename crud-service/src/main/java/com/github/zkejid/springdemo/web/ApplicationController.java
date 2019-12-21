@@ -59,6 +59,6 @@ public class ApplicationController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String greeting() {
-        return "Hello World";
+        return "Hello, World!";
     }
 }
