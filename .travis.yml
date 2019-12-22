@@ -1,4 +1,6 @@
 language: java
+jdk:
+  - oraclejdk8
 deploy:
   provider: heroku
   app: zkejid-spring-boot-demo
